@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SY_PauseMenu</title>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!--icons-->
+    <script
+      src="https://kit.fontawesome.com/1967e9d06d.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--anim-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body style="background-color: rgba(0, 0, 0, 0)">
+    <div class="main-container flex-nowrap">
+      <div class="d-flex flex-column flex-shrink-0" style="width: 100%">
+        <!--SideBar-->
+        <div class="side-bar d-flex flex-nowrap">
+          <div
+            class="d-flex flex-column flex-shrink-0 p-3"
+            style="width: 450px"
+          >
+            <a
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+            >
+              <div id="user_img"></div>
+              <div class="d-inline-block mx-5">
+                <div class="pr_name fs-1" id="pr_name"><h2>SYNO</h2></div>
+                <div id="pr_job"><span class="job">EMS-Junior EMT</span></div>
+              </div>
+            </a>
+            <hr />
+            <!--Content-Tab-->
+            <div class="sidebar-content-tab d-flex flex-nowrap">
+              <div
+                class="d-flex flex-column flex-shrink-0 p-3"
+                style="width: 100%"
+              >
+                <!--info-Tab-->
+                <div class="info-panel d-flex flex-column mb-3">
+                  <div class="p-2 mt-3">
+                    <div class="info-panel-text d-flex justify-content-between">
+                      <h5>
+                        <i class="fa-solid fa-signal"
+                          ><span class="mx-2">Ping</span></i
+                        >
+                      </h5>
+                      <div id="player-ping"></div>
+                    </div>
+                  </div>
+                  <div class="p-2 mt-3">
+                    <div class="d-flex justify-content-between">
+                      <h5>
+                        <i class="fa-solid fa-money-bill-1"
+                          ><span class="mx-2">Money</span></i
+                        >
+                      </h5>
+                      <div id="player-money"></div>
+                    </div>
+                  </div>
+                  <div class="p-2 mt-3">
+                    <div class="d-flex justify-content-between">
+                      <h5>
+                        <i class="fa-solid fa-wallet"
+                          ><span class="mx-2">Bank</span></i
+                        >
+                      </h5>
+                      <div id="player-bank"></div>
+                    </div>
+                  </div>
+                  <div class="p-2 mt-3">
+                    <div class="d-flex justify-content-between">
+                      <h5>
+                        <i class="fa-solid fa-user"
+                          ><span class="mx-2">Players</span></i
+                        >
+                      </h5>
+                      <div id="player-count"></div>
+                    </div>
+                  </div>
+                </div>
+                <!--End Of info-Tab-->
+                <h5 class="ooc">OOC CHAT</h5>
+                <!--ooc-Tab-->
+                <div class="ooc-tab d-flex flex-nowrap">
+                  <div
+                    class="d-flex flex-column flex-shrink-0 p-3"
+                    style="width: 100%"
+                  >
+                    <div class="ooc-tab1 d-flex flex-nowrap my-4">
+                      <div
+                        class="d-flex flex-column flex-shrink-0"
+                        style="width: 100%"
+                      >
+                        <div
+                          class="vstack gap-2 flex-column-reverse"
+                          id="ooc_msg"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="input-group my-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="ooc_text"
+                        placeholder="Type something in [OOC] chat"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default"
+                      />
+                      <button type="button" class="ooc_btn btn" id="ooc_btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!--End Of ooc-Tab-->
+              </div>
+            </div>
+            <!--End Of Content-Tab-->
+          </div>
+        </div>
+        <!--End Of SideBar-->
+        <!--mainBar-->
+        <main class="d-flex flex-nowrap">
+          <div class="d-flex flex-column flex-shrink-0" style="width: 100%">
+            <!--Header-->
+            <nav class="navbar" style="min-height: 150px">
+              <div class="container-fluid">
+                <a class="navbar-brand welcome"
+                  >WELCOME,<br />
+                  You're at Roleplay for
+                  <span id="Totaltime">00H : 00M</span></a
+                >
+                <div id="time"></div>
+                <div class="d-block text-center">
+                  <div id="date"></div>
+                  <div id="weekday"></div>
+                </div>
+                <a class="navbar-brand" href="#">
+                  <img
+                    src="./imgs/logoscripts.png"
+                    alt="Bootstrap"
+                    width="220"
+                    height="80"
+                  />
+                </a>
+              </div>
+            </nav>
+            <!--End of Header-->
+            <!--Content-Tab-->
+            <div class="main-content-tab d-flex flex-nowrap mx-5 my-3">
+              <div
+                class="d-flex flex-column flex-shrink-0 p-3"
+                style="width: 100%"
+              >
+                <div class="card-container d-flex flex-nowrap my-4">
+                  <div
+                    class="flex-column flex-shrink-0"
+                    style="display: flex; width: 100%"
+                    id="main-display-container"
+                  >
+                    <!--Main-content-->
+                    <div class="main-content justify-content-evenly">
+                      <div class="card player-info">
+                        <div
+                          class="card-body text-center"
+                          style="
+                            width: 25rem;
+                            backdrop-filter: blur(10px);
+                            border-radius: 40px;
+                            color: rgb(255, 255, 255);
+                            background: linear-gradient(#3d3d3d75, #0000003c);
+                          "
+                        >
+                          <i
+                            class="fa-solid fa-circle-user"
+                            style="
+                              font-size: 220px;
+                              margin-top: 80px;
+                              color: var(--icon-color);
+                            "
+                          >
+                            <h1
+                              style="
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                                  sans-serif;
+                                font-weight: 700;
+                              "
+                            >
+                              Player Details
+                            </h1></i
+                          >
+                          <h5 class="mt-3">Click to open player details</h5>
+                          <button
+                            type="button"
+                            class="btn player-info-btn my-5 position-absolute bottom-0 start-50 translate-middle-x"
+                            id="player-info"
+                          >
+                            <i class="fa-solid fa-user"></i>
+                            PLYAER INFO
+                          </button>
+                        </div>
+                      </div>
+                      <div class="card report">
+                        <div
+                          class="card-body text-center"
+                          style="
+                            width: 30rem;
+                            backdrop-filter: blur(10px);
+                            border-radius: 40px;
+                            color: rgb(255, 255, 255);
+                            background: linear-gradient(#3d3d3d75, #0000003c);
+                          "
+                        >
+                          <i
+                            class="fa-solid fa-headphones-simple"
+                            style="
+                              font-size: 220px;
+                              margin-top: 80px;
+                              color: var(--icon-color);
+                            "
+                            ><h1
+                              style="
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana,
+                                  sans-serif;
+                                font-weight: 700;
+                              "
+                            >
+                              Report
+                            </h1></i
+                          >
+                          <h5 class="mt-3">Click To Open Report Tab</h5>
+                          <button
+                            type="button"
+                            class="report-btn btn my-5 position-absolute bottom-0 start-50 translate-middle-x"
+                            id="report-btn"
+                          >
+                            <i class="fa-solid fa-bug"></i>
+                            REPORT
+                          </button>
+                        </div>
+                      </div>
+                      <div class="card patchnote">
+                        <div
+                          class="card-body text-center"
+                          style="
+                            width: 25rem;
+                            backdrop-filter: blur(10px);
+                            border-radius: 40px;
+                            color: rgb(255, 255, 255);
+                          "
+                        >
+                          <h2 class="card-title mt-4">PATCH NOTES</h2>
+                          <hr style="color: rgb(63, 63, 63)" />
+                          <h6
+                            class="card-subtitle mb-2 text-start"
+                            style="color: rgb(255, 255, 255)"
+                          >
+                            30.02.2023
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Main-content over-->
+
+                    <!--player-info-content-->
+                    <div class="player-info-card" style="display: none">
+                      <div class="position-relative">
+                        <div class="position-absolute top-0 end-0">
+                          <div class="player-info-btn btn" id="back_mainMenu">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            BACK
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-row mb-3 mx-5 my-5 gap-5 justify-content-center"
+                      >
+                        <div id="player-mugshot"></div>
+                        <div class="d-inline justify-content-between my-0">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <h3>First Name</h3>
+                                </td>
+                                <td>
+                                  <div id="firstName"><h3>: GAUTHAM</h3></div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h3>Last Name</h3>
+                                </td>
+                                <td>
+                                  <div id="lastName"><h3>: Vijay</h3></div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h3>SEX</h3>
+                                </td>
+                                <td>
+                                  <div id="sex"><h3>: Male</h3></div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h3>Job</h3>
+                                </td>
+                                <td>
+                                  <div id="job"><h3>: EMS</h3></div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div
+                        class="player-info-prog d-flex justify-content-center"
+                      >
+                        <div class="d-block w-50">
+                          <div class="d-flex mt-3 text-center">
+                            <img
+                              src="./imgs/health.svg"
+                              alt=""
+                              style="width: 50px; height: 50px"
+                            />
+                            <h3 class="mt-2">Health</h3>
+                          </div>
+                          <div id="health_bar">
+                            <div
+                              class="progress"
+                              role="progressbar"
+                              aria-label="Example with label"
+                              aria-valuenow="0"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              <div class="progress-bar" style="width: 100%">
+                                100%
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="d-flex mt-3 text-center">
+                            <img
+                              class="mx-1"
+                              src="./imgs/food.svg"
+                              alt=""
+                              style="width: 40px; height: 40px"
+                            />
+                            <h3 class="">Hunger</h3>
+                          </div>
+                          <div id="Hunger_bar">
+                            <div
+                              class="progress"
+                              role="progressbar"
+                              aria-label="Example with label"
+                              aria-valuenow="25"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              <div class="progress-bar" style="width: 75%">
+                                75%
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="d-flex mt-3 text-center">
+                            <img
+                              class="mx-2"
+                              src="./imgs/drop.svg"
+                              alt=""
+                              style="width: 35px; height: 35px"
+                            />
+                            <h3 class="">Thirst</h3>
+                          </div>
+                          <div id="Thirst_bar">
+                            <div
+                              class="progress"
+                              role="progressbar"
+                              aria-label="Example with label"
+                              aria-valuenow="25"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              <div class="progress-bar" style="width: 25%">
+                                25%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--player-content-end-->
+                    <!--report-content-->
+                    <div class="report-card" style="display: none">
+                      <div class="position-relative">
+                        <div class="position-absolute top-0 end-0">
+                          <div
+                            class="player-info-btn btn"
+                            id="back_mainMenu_fr_report"
+                          >
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            BACK
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="d-flex flex-row mb-3 mx-5 my-5 gap-5 justify-content-center"
+                      >
+                        <h1>REPORT-FORM</h1>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <div class="d-block w-50">
+                          <select
+                            class="form-select text-center"
+                            id="report_type"
+                            aria-label="Default select example"
+                          >
+                            <option value="1">Bug</option>
+                            <option value="2">Sugesstion</option>
+                            <option value="3">Help</option>
+                          </select>
+                          <div class="mb-3">
+                            <label
+                              for="exampleFormControlInput1"
+                              class="form-label mt-3"
+                              >Subject</label
+                            >
+                            <input
+                              type="text "
+                              id="report_suggestion"
+                              class="form-control"
+                              id="exampleFormControlInput1"
+                              style="border-radius: 10px"
+                              placeholder="Plyer Report"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label
+                              for="exampleFormControlTextarea1"
+                              class="form-label"
+                              >Information</label
+                            >
+                            <textarea
+                              class="form-control"
+                              id="report_text"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                          <div class="mt-5 text-center">
+                            <button
+                              type="button"
+                              id="report_btn"
+                              class="report-submit-btn btn"
+                              style="
+                                font-weight: 800;
+                                font-size: 20px;
+                                letter-spacing: 2px;
+                              "
+                            >
+                              <i class="fa-solid fa-paper-plane"></i>
+                              SUBMIT
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--report-content-end-->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--End Of Content-Tab-->
+            <!--Footer-->
+            <div class="icon-footer d-flex justify-content-evenly">
+              <div class="op-btn text-center" id="setting">
+                <div class="d-flex flex-column">
+                  <img class="mx-3" src="./imgs/setting.svg" />
+                  <span class="my-2">Settings</span>
+                </div>
+              </div>
+              <div class="op-btn" id="map">
+                <div class="d-flex flex-column text-center">
+                  <img class="mx-3" src="./imgs/map.svg" />
+                  <span class="my-2 mx-1">Map</span>
+                </div>
+              </div>
+              <div class="op-btn" id="resume">
+                <div class="d-flex flex-column text-center">
+                  <img class="mx-4 pt-2" src="./imgs/resume.svg" />
+                  <span class="my-2">Resume</span>
+                </div>
+              </div>
+              <div class="op-btn" id="keybind">
+                <div class="d-flex flex-column text-center">
+                  <img class="mx-3" src="./imgs/keyboard.svg" />
+                  <span class="my-2">Keybinds</span>
+                </div>
+              </div>
+              <div class="op-btn" id="exit">
+                <div class="d-flex flex-column text-center">
+                  <img class="mx-3" src="./imgs/exit.svg" />
+                  <span class="my-2">Exit</span>
+                </div>
+              </div>
+            </div>
+            <!--End of Footer-->
+            <hr />
+            <div class="footer d-flex justify-content-evenly py-3"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!--End of Footer-->
+
+    <!--End of mainBar-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="./bootstrap/bootstrap.min.js"></script>
+    <script defer type="module" src="./js/main.js"></script>
+  </body>
+</html>
