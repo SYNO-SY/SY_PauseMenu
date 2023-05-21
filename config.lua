@@ -1,6 +1,6 @@
 Config                  = {}
 Config.Locale = GetConvar('esx:locale', 'en')
-Config.BotToken = 'OTEyOTk5MDYzMTM2NDAzNTE2.GGLrWL.ZMxxTFoykGW5yLHS8BBkCY1giTvZnXnOMCqFxM'  -- How to create a bot token https://www.youtube.com/watch?v=-m-Z7Wav-fM
+Config.BotToken = ''  -- How to create a bot token https://www.youtube.com/watch?v=-m-Z7Wav-fM
 Config.EnableDiscordImages = true -- if false will display default images
 Config.MaleDefaultImage = 'https://i.imgur.com/FnYSDHq.png'
 Config.FemaleDefaultImage = 'https://i.imgur.com/1DMGtLP.png'
