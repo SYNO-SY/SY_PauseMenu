@@ -7,3 +7,25 @@ Config.DefaultFemaleImage = 'https://imgur.com/Tovcqdp.png'
 Config.WebHook = '' --Report system webhook
 Config.webhookName = 'SY_Pausemenu' -- Name of the WebHook
 Config.webhookLogo = 'https://cdn.discordapp.com/attachments/954263572874137671/984808162857222164/discord.png' -- Avatar of the WebHook
+
+--notification
+Config.Notification = "ESX"         -- ESX,okok,custom.
+sendNotification = function(text,msgtype,IsServer,src,time)
+    if IsServer then
+		if Config.Notification == "ESX" then
+			TriggerClientEvent('esx:showNotification', source, text, msgtype, time)
+		elseif Config.Notification == "okok" then
+			TriggerClientEvent('okokNotify:Alert', source, "Repairshop", text, time, msgtype )
+		elseif Config.Notification == "custom"  then
+			TriggerClientEvent('SY_Notify:Alert', source, "Repairshop", text, time, msgtype )
+		end
+    else
+		if Config.Notification == "ESX" then
+			ESX.ShowNotification(text, time, msgtype)
+		elseif Config.Notification == "okok" then
+			exports['okokNotify']:Alert("Repairshop", text, 5000, msgtype)
+		elseif Config.Notification == "custom"  then
+			exports['SY_Notify']:Alert("Repairshop", text, 5000, msgtype)
+		end
+    end
+end
