@@ -23,9 +23,9 @@ ESX.RegisterServerCallback('SY_Pausemenu:GetPlayerAvatar', function(source, cb, 
         cb(GetDiscordAvatar(source, gender)) 
     else
         if gender == 'm' then
-            cb(Config.MaleDefaultImage)
+            cb(Config.DefaultMaleImage)
         else
-            cb(Config.FemaleDefaultImage)
+            cb(Config.DefaultFemaleImage)
         end
     end
 end)
