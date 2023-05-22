@@ -1,11 +1,6 @@
 # SY_PasueMenu
-
-  WIP SY_PauseMenu,<br>
-  Use With your own risk.
   ## codem inspired pausemenu
-  # Todo
-   - Alot!!!!!
   
-![Screenshot 2023-04-29 172735](https://github.com/SYNO-SY/SY_PasueMenu/assets/89760730/cdac3991-702b-4d41-9688-776a791206ca)
-![Screenshot 2023-04-29 180302](https://github.com/SYNO-SY/SY_PasueMenu/assets/89760730/314bc7e2-82f1-4f48-9b65-82c9b2e3af8e)
-![Screenshot 2023-04-29 180526](https://github.com/SYNO-SY/SY_PasueMenu/assets/89760730/28184fb7-947b-4265-b10e-3748d074de62)
+![pausemenu 2](https://github.com/SYNO-SY/SY_PauseMenu/assets/89760730/8cd5f5a5-1163-4b89-8e37-4372a3e31813)
+![pausemenu 3](https://github.com/SYNO-SY/SY_PauseMenu/assets/89760730/31cb6641-4702-4711-8650-0ed87523c68a)
+![pasuemenu 1](https://github.com/SYNO-SY/SY_PauseMenu/assets/89760730/ba0fca6f-3b79-4ae1-b7f9-17b8e310909d)
