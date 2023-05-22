@@ -42,9 +42,6 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
     end
 end)
 
-CreateThread(function ()
-end)
-
 AddEventHandler('esx_status:onTick', function(data)
     local values = {}
     local hunger, thirst
@@ -166,6 +163,9 @@ RegisterNUICallback('exit', function()
     TriggerServerEvent('SY_PasueMenu:DropPlayer')
 end)
 RegisterNUICallback('Report', function(data)
+    pausemenu_opend = false
+    ClosePuaseMenu()
+    sendNotification("Report has been submited succesfully","success",false,nil,5000)
    TriggerServerEvent("SY_PauseMenu:sendWebHook", data)
 end)
 
