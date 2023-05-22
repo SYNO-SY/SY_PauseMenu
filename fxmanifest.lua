@@ -6,7 +6,7 @@ game        'gta5'
 
 name         'SY_Pausemenu'
 author       'SYNO'
-version      '1.0.'
+version      '1.1'
 license      'LGPL-3.0-or-later'
 repository   'https://github.com/SYNO-SY/SY_PauseMenu'
 description  'A Fivem Pausemenu script.'
