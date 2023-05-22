@@ -2,14 +2,14 @@ ESX = exports["es_extended"]:getSharedObject()
 
 
 local Avatars = {}
-local FormattedToken = "Bot " .. Config.BotToken
+local Token_Format = "Bot " .. Config.BotToken
 
 function DiscordRequest(method, endpoint, jsondata)
     local data = nil
     PerformHttpRequest("https://discordapp.com/api/" .. endpoint, function(errorCode, resultData, resultHeaders)
         data = { data = resultData, code = errorCode, headers = resultHeaders }
     end, method, #jsondata > 0 and json.encode(jsondata) or "",
-        { ["Content-Type"] = "application/json", ["Authorization"] = FormattedToken })
+        { ["Content-Type"] = "application/json", ["Authorization"] = Token_Format })
 
     while data == nil do
         Citizen.Wait(0)
