@@ -20,7 +20,7 @@ body {
   --prog-bar-end: rgba(175, 7, 241, 0.833);
   --btn-bg-start: rgba(233, 23, 248, 0.723);
   --btn-bg-end: rgba(175, 7, 241, 0);
-
+  background-color: white;
   /*display: none;*/
 }
 
@@ -44,9 +44,9 @@ body {
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  background-image: url("./imgs/backimg.jpg");
-  backdrop-filter: blur(20px);
-  opacity: 30px;
+  /*background-image: url("./imgs/backimg.jpg");*/
+  /*backdrop-filter: blur(20px);*/
+  /*opacity: 30px;*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -132,6 +132,7 @@ hr {
   text-shadow: 0 0 15px #e3e3e3;
   background-color: var(--btn-hover-color);
   border: none;
+  transition: 0.5s;
   transform: translate(0, -10px);
 }
 
@@ -153,6 +154,7 @@ hr {
 }
 
 .main-content {
+  background-color: none;
   overflow: hidden;
   display: flex;
   width: 100%;
@@ -195,7 +197,7 @@ hr {
 }
 
 .form-control::placeholder {
-  color: white;
+  color: rgb(199, 197, 197);
 }
 
 .test {
@@ -239,7 +241,7 @@ hr {
   color: rgb(172, 172, 172);
 }
 .player-info {
-  background-image: url(./imgs/bg.jpg);
+  background-image: url(./imgs/bg-blur.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -248,7 +250,7 @@ hr {
 }
 
 .report {
-  background-image: url(./imgs/report-bg.jpg);
+  background-image: url(./imgs/report-bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -257,7 +259,7 @@ hr {
 }
 
 .patchnote {
-  background-image: url(./imgs/patchnotes-bg.jpg);
+  background-image: url(./imgs/patchnotes-bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -287,6 +289,7 @@ hr {
     var(--prog-bar-end) 100%
   );
   border-radius: 25px;
+  transition: 0.5s;
 }
 
 .player-info-btn,
@@ -326,6 +329,7 @@ h1 {
 }
 
 .form-select {
+  color: white;
   border-radius: 9px;
   background-color: var(--color);
   border: 1px solid rgba(255, 255, 255, 0.112);
