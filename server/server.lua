@@ -1,6 +1,5 @@
 ESX = exports["es_extended"]:getSharedObject()
 
-
 local Avatars = {}
 local Token_Format = "Bot " .. Config.BotToken
 
@@ -20,7 +19,7 @@ end
 
 ESX.RegisterServerCallback('SY_Pausemenu:GetPlayerAvatar', function(source, cb, gender)
     if Config.EnableDiscordImages then
-        cb(GetDiscordAvatar(source, gender)) 
+        cb(GetDiscordAvatar(source, gender))
     else
         if gender == 'm' then
             cb(Config.DefaultMaleImage)
@@ -38,11 +37,6 @@ ESX.RegisterServerCallback('SY_Pausemenu:GetAllPlayer', function(source, cb)
     if total_players then
         cb(tab)
     end
-end)
-
-ESX.RegisterServerCallback('SY_Pausemenu:GetPlayerMoney', function(source, cb)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    cb(xPlayer.getAccounts())
 end)
 
 function GetDiscordAvatar(user, gender)
@@ -93,7 +87,7 @@ end
 
 RegisterServerEvent('SY_PasueMenu:DropPlayer')
 AddEventHandler('SY_PasueMenu:DropPlayer', function()
-    DropPlayer(source, 'You disconnected from the server.')
+    DropPlayer(source, 'You Have disconnected from the server.')
 end)
 
 
