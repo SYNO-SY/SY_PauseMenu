@@ -1,24 +1,8 @@
 import { fetchNui } from "./fetchNui.js";
 
-function toDataUrl(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    var reader = new FileReader();
-    reader.onloadend = function () {
-      callback(reader.result);
-    };
-    reader.readAsDataURL(xhr.response);
-  };
-  xhr.open("GET", url);
-  xhr.responseType = "blob";
-  xhr.send();
-}
-
 function Realtime() {
   let interval = setInterval(() => {
     const date = new Date();
-    var dateD =
-      date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
     if (minutes < 10) {
@@ -73,6 +57,8 @@ window.addEventListener("message", (e) => {
   if (event.action == "openui") {
     Realtime();
     weekday();
+    var Theme = event.theme;
+    document.documentElement.setAttribute("data-theme", Theme);
     $(".main-container").css("display", "flex");
     $(".main-content").removeClass("animate__animated animate__zoomIn");
   }
@@ -105,10 +91,7 @@ window.addEventListener("message", (e) => {
     $("#player-count").html(`<h5 id="player-count">${event.player_count}</h5>`);
     $("#player-ping").html(`<h5 id="player-ping">${event.player_ping}ms</h5>`);
   }
-  if (event.action == "SetPlayeraccounts") {
-    $("#player-money").html(`<h5 id="player-count">$${event.player_cash}</h5>`);
-    $("#player-bank").html(`<h5 id="player-count">$${event.player_bank}</h5>`);
-  }
+
   if (event.action == "Setooc") {
     var number = Math.floor(Math.random() * 1000 + 1);
     var oocMsg = `
@@ -122,8 +105,30 @@ window.addEventListener("message", (e) => {
     $("#job").html(`<h3>: ${event.PlayerData.job}</h3>`);
     $("#pr_name").html(`<h2>${event.PlayerData.firstName}</h2>`);
     $("#pr_job").html(`<span class="job">${event.PlayerData.jobName}</span>`);
-    //$("#player-bank").html(`<h5 id="player-count">$${event.player_bank}</h5>`);
+    $("#player-money").html(
+      `<h5 id="player-money">$${event.PlayerData.cash}</h5>`
+    );
+    $("#player-bank").html(
+      `<h5 id="player-bank">$${event.PlayerData.bank}</h5>`
+    );
   }
+
+  if (event.action == "SetPatchnotes") {
+    var PatchDate = event.PatchnoteDate;
+    var PatchNotes = event.Patchnotes;
+    $("#patchdate").html(`<h6
+    class="card-subtitle mb-2 text-start"
+    style="color: rgb(255, 255, 255)"
+    id="patchdate"
+     >${PatchDate}</h6>`);
+    $("#patchnote").append(`<h6
+    class="card-subtitle mb-2 text-start"
+    style="color: rgb(255, 255, 255)"
+  >
+    &#x2022; ${PatchNotes}
+  </h6>`);
+  }
+
   if (event.action == "SetStatus") {
     $("#health_bar").html(`<div
     class="progress"
@@ -177,26 +182,12 @@ window.addEventListener("message", (e) => {
   if (event.action == "closeui") {
     $(".main-container").css("display", "none");
   }
-
-  if (event.type === "convert_base64") {
-    toDataUrl(event.img, function (base64) {
-      fetch(`https://${GetParentResourceName()}/base64`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json; charset=UTF-8" },
-        body: JSON.stringify({
-          base64: base64,
-          handle: event.handle,
-          id: event.id,
-        }),
-      });
-    });
-  }
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.keyCode == 27) {
     $(".main-container").css("display", "none");
-    fetchNui("close");
+    $.post("https://SY_PauseMenu/close");
   }
 });
 
@@ -230,23 +221,23 @@ $("#back_mainMenu_fr_report").click(function (e) {
 
 $("#setting").click(function (e) {
   e.preventDefault();
-  fetchNui("settings");
+  $.post("https://SY_PauseMenu/settings");
 });
 $("#map").click(function (e) {
   e.preventDefault();
-  fetchNui("map");
+  $.post("https://SY_PauseMenu/map");
 });
 $("#resume").click(function (e) {
   e.preventDefault();
-  fetchNui("resume");
+  $.post("https://SY_PauseMenu/resume");
 });
 $("#keybind").click(function (e) {
   e.preventDefault();
-  fetchNui("keybind");
+  $.post("https://SY_PauseMenu/keybind");
 });
 $("#exit").click(function (e) {
   e.preventDefault();
-  fetchNui("exit");
+  $.post("https://SY_PauseMenu/exit");
 });
 
 // report form
