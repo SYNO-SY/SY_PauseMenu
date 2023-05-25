@@ -6,7 +6,7 @@
   user-select: none;
 }
 
-body {
+html[data-theme="purple"] {
   --color: #ae00ffac;
   --btn-color: #d000ff6e;
   --theme-color: #bb00ff;
@@ -20,8 +20,70 @@ body {
   --prog-bar-end: rgba(175, 7, 241, 0.833);
   --btn-bg-start: rgba(233, 23, 248, 0.723);
   --btn-bg-end: rgba(175, 7, 241, 0);
-  background-color: white;
-  /*display: none;*/
+}
+
+html[data-theme="red"] {
+  --color: #ff0000ac;
+  --btn-color: #ff00006e;
+  --theme-color: #ff0000;
+  --btn-hover-color: #ff0000d0;
+  --theme-bg-color: #ff000026;
+  --color-focus: #ff0000d0;
+  --scroll-thumb: #ff242499;
+  --scroll-thumb-hover: #ff242499;
+  --icon-color: #ff24245a;
+  --prog-bar-start: rgba(248, 23, 23, 0.21);
+  --prog-bar-end: rgba(241, 7, 7, 0.833);
+  --btn-bg-start: rgba(248, 23, 23, 0.723);
+  --btn-bg-end: rgba(241, 7, 7, 0);
+}
+
+html[data-theme="blue"] {
+  --color: #00ffee8b;
+  --btn-color: #00ffee6e;
+  --theme-color: #00ffee;
+  --btn-hover-color: #00ffeed0;
+  --theme-bg-color: #00ffee26;
+  --color-focus: #00ffeed0;
+  --scroll-thumb: #24e2ff99;
+  --scroll-thumb-hover: #24e2ff99;
+  --icon-color: #24e5ff5a;
+  --prog-bar-start: rgba(23, 237, 248, 0.21);
+  --prog-bar-end: rgba(7, 233, 241, 0.833);
+  --btn-bg-start: rgba(23, 233, 248, 0.723);
+  --btn-bg-end: rgba(7, 229, 241, 0);
+}
+
+html[data-theme="green"] {
+  --color: #00ff1a8b;
+  --btn-color: #00ff266e;
+  --theme-color: #00ff59;
+  --btn-hover-color: #00ff1ad0;
+  --theme-bg-color: #00ff2226;
+  --color-focus: #00ff37d0;
+  --scroll-thumb: #24ff3e99;
+  --scroll-thumb-hover: #24ff5099;
+  --icon-color: #24ff2b5a;
+  --prog-bar-start: rgba(23, 248, 34, 0.21);
+  --prog-bar-end: rgba(7, 241, 50, 0.833);
+  --btn-bg-start: rgba(23, 248, 53, 0.723);
+  --btn-bg-end: rgba(7, 241, 7, 0);
+}
+
+html[data-theme="grey"] {
+  --color: #c8c8c870;
+  --btn-color: #5a5a5a6e;
+  --theme-color: #c9c9c9;
+  --btn-hover-color: #747474d0;
+  --theme-bg-color: #8f8f8f26;
+  --color-focus: #8c8c8cd0;
+  --scroll-thumb: #99999999;
+  --scroll-thumb-hover: #95959599;
+  --icon-color: #9191915a;
+  --prog-bar-start: rgba(132, 132, 132, 0.21);
+  --prog-bar-end: rgba(128, 128, 128, 0.833);
+  --btn-bg-start: rgba(118, 118, 118, 0.723);
+  --btn-bg-end: rgba(131, 131, 131, 0);
 }
 
 .side-bar {
@@ -29,7 +91,7 @@ body {
   background: linear-gradient(
     45deg,
     var(--color) 0%,
-    rgba(18, 18, 18, 0.14) 100%
+    rgba(18, 18, 18, 0.315) 100%
   );
   min-height: 100vh;
   height: 100%;
@@ -211,6 +273,8 @@ hr {
   overflow-x: auto;
   overflow-y: auto;
   border-radius: 20px;
+  word-wrap: break-word;
+  white-space: nowrap;
 }
 
 .card-container {
@@ -397,4 +461,13 @@ option:focus {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scroll-thumb-hover);
+}
+
+.card-body::-webkit-scrollbar {
+  display: none;
+}
+
+#patchnote {
+  overflow-y: scroll;
+  max-height: 500px;
 }
