@@ -18,8 +18,8 @@ Config.Theme = 'grey' -- purple,red,green,blue,grey
 -- ██████╔╝██║███████║╚██████╗╚██████╔╝██║  ██║██████╔╝
 -- ╚═════╝ ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝                                                 
 
-Config.BotToken = 'OTEyOTk5MDYzMTM2NDAzNTE2.GzLbkl.R13kltOMgMRboO9dS6R4ou1vI1y7OtVDr7Hjy0' -- How to create a bot token https://www.youtube.com/watch?v=-m-Z7Wav-fM
-Config.WebHook = 'https://discord.com/api/webhooks/1109891957100126258/23BE7lTeavJSligdzB9Yp4bWCPL-F3JslBmLaCfUnYB0tUGb_6W4AMWnZZgtZq4s_wvr' -- Report system webhook
+Config.BotToken = '' -- How to create a bot token https://www.youtube.com/watch?v=-m-Z7Wav-fM
+Config.WebHook = '' -- Report system webhook
 Config.webhookName = 'SY_Pausemenu' -- Name of the WebHook
 Config.webhookLogo = 'https://cdn.discordapp.com/attachments/954263572874137671/984808162857222164/discord.png' -- Avatar of the WebHook
 Config.EnableDiscordImages = true -- if false will display default images
