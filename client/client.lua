@@ -2,7 +2,6 @@ ESX = exports["es_extended"]:getSharedObject()
 local pausemenu_opend = false
 local PlayerData = {}
 
-
 CreateThread(function()
     local playMinute, playHour = 0, 0
     while true do
@@ -28,26 +27,72 @@ CreateThread(function()
     end
 end)
 
+CreateThread(function()
+    while true do
+        Wait(100)
+        SendNUIMessage({
+            action = 'SetPlayerdetails',
+            PlayerData = PlayerData
+        })
+        ESX.TriggerServerCallback('SY_Pausemenu:GetAllPlayer', function(cb)
+            SendNUIMessage({
+                action = 'Setcount',
+                player_count = cb[1],
+                player_ping = cb[2]
+            })
+        end)
+    end
+end)
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
+    Wait(1000)
     ESX.PlayerData = xPlayer
     PlayerData.firstName = ESX.PlayerData.firstName
     PlayerData.lastName = ESX.PlayerData.lastName
     PlayerData.job = ESX.PlayerData.job.label
     PlayerData.jobName = ESX.PlayerData.job.grade_label
+    local accounts = ESX.PlayerData.accounts
+    for _, data in pairs(accounts) do
+        if data.name == 'bank' then
+            PlayerData.bank = data.money
+        elseif data.name == 'money' then
+            PlayerData.cash = data.money
+        end
+    end
     if ESX.PlayerData.sex == "m" then
         PlayerData.sex = "Male"
     else
         PlayerData.sex = "Female"
     end
+    local patchnotes
+    for _, v in ipairs(Config.PatchNotes.updates) do
+        patchnotes = v
+        SendNUIMessage({
+            action = 'SetPatchnotes',
+            PatchnoteDate = Config.PatchNotes.date,
+            Patchnotes = patchnotes
+        })
+    end
+end)
+
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+    ESX.PlayerData.job = job
+    PlayerData.job = ESX.PlayerData.job.label
+    PlayerData.jobName = ESX.PlayerData.job.grade_label
 end)
 
 AddEventHandler('esx_status:onTick', function(data)
     local values = {}
     local hunger, thirst
     for i = 1, #data do
-        if data[i].name == 'thirst' then thirst = math.floor(data[i].percent) end
-        if data[i].name == 'hunger' then hunger = math.floor(data[i].percent) end
+        if data[i].name == 'thirst' then
+            thirst = math.floor(data[i].percent)
+        end
+        if data[i].name == 'hunger' then
+            hunger = math.floor(data[i].percent)
+        end
     end
 
     local ped = PlayerPedId()
@@ -63,6 +108,14 @@ AddEventHandler('esx_status:onTick', function(data)
 end)
 
 RegisterCommand("pausemenu", function()
+    if Config.Inventory == 'ox' then
+        local isInventoryBusy = LocalPlayer.state.invOpen
+        if isInventoryBusy then
+            pausemenu_opend = true
+        else
+            pausemenu_opend = false
+        end
+    end
     SendNui()
     if pausemenu_opend == true then
         pausemenu_opend = false
@@ -73,45 +126,19 @@ RegisterCommand("pausemenu", function()
     end
 end)
 
-
 function SendNui()
     ESX.TriggerServerCallback('SY_Pausemenu:GetPlayerAvatar', function(cb)
+        local mugshot, mugshotStr = ESX.Game.GetPedMugshot(PlayerPedId())
+        local img_url = string.format("https://nui-img/%s/%s", mugshotStr, mugshotStr)
         SendNUIMessage({
             action = 'Setprofile',
             pr_img = cb
         })
         SendNUIMessage({
             action = 'Setmugshot',
-            mugshot_img = getpedmugshot()
+            mugshot_img = img_url
         })
     end, 'male')
-    ESX.TriggerServerCallback('SY_Pausemenu:GetAllPlayer', function(cb)
-        SendNUIMessage({
-            action = 'Setcount',
-            player_count = cb[1],
-            player_ping = cb[2]
-        })
-    end)
-    ESX.TriggerServerCallback('SY_Pausemenu:GetPlayerMoney', function(cb)
-        for k,v in pairs(cb) do
-            if v.label == 'Bank' then
-               player_bank = v.money
-            end
-            if v.label == 'Cash' then
-                player_cash = v.money
-             end
-        end
-        SendNUIMessage({
-            action = 'SetPlayeraccounts',
-            player_cash = player_cash,
-            player_bank = player_bank
-        })
-    end, 0)
-
-    SendNUIMessage({
-        action = 'SetPlayerdetails',
-        PlayerData = PlayerData
-    })
 end
 
 RegisterKeyMapping("pausemenu", "Open PauseMenu", "keyboard", "Escape")
@@ -120,7 +147,8 @@ function OpenPuaseMenu()
     pausemenu_opend = true
     SetNuiFocus(true, true)
     SendNUIMessage({
-        action = 'openui'
+        action = 'openui',
+        theme = Config.Theme
     })
 end
 
@@ -165,107 +193,16 @@ end)
 RegisterNUICallback('Report', function(data)
     pausemenu_opend = false
     ClosePuaseMenu()
-    sendNotification("Report has been submited succesfully","success",false,nil,5000)
-   TriggerServerEvent("SY_PauseMenu:sendWebHook", data)
+    sendNotification("Report has been submited succesfully", "success", false, nil, 5000)
+    TriggerServerEvent("SY_PauseMenu:sendWebHook", data)
 end)
 
 --[[END OF NUI CALLBACK]]
---
-
---[[MUG-SHOT]]
-requests = {}
-
-function GenerateId()
-    local id = ""
-    for i = 1, 15 do
-        id = id .. (math.random(1, 2) == 1 and string.char(math.random(97, 122)) or tostring(math.random(0, 9)))
-    end
-    return id
-end
-
-function ClearHeadshots()
-    for i = 1, 32 do
-        if IsPedheadshotValid(i) then
-            UnregisterPedheadshot(i)
-        end
-    end
-end
-
-function GetHeadshot(ped)
-    ClearHeadshots()
-    if not ped then ped = PlayerPedId() end
-    if DoesEntityExist(ped) then
-        local handle, timer = RegisterPedheadshot(ped), GetGameTimer() + 5000
-        while not IsPedheadshotReady(handle) or not IsPedheadshotValid(handle) do
-            Wait(50)
-            if GetGameTimer() >= timer then
-                return { success = false, error = "Could not load ped headshot." }
-            end
-        end
-
-        local txd = GetPedheadshotTxdString(handle)
-        local url = string.format("https://nui-img/%s/%s", txd, txd)
-        return { success = true, url = url, txd = txd, handle = handle }
-    end
-end
-
-function getpedmugshot()
-    if not ped then ped = PlayerPedId() end
-    local headshot = GetHeadshot(ped)
-    if headshot.success then
-        mugshotimg = headshot.url
-        return mugshotimg
-    else
-        return nil
-    end
-end
-
-function GetBase64(ped)
-    if not ped then ped = PlayerPedId() end
-    local headshot = GetHeadshot(ped)
-    if headshot.success then
-        local requestId = GenerateId()
-        requests[requestId] = nil
-        SendNUIMessage({
-            type = "convert_base64",
-            img = headshot.url,
-            handle = headshot.handle,
-            id = requestId
-        })
-
-        local timer = GetGameTimer() + 5000
-        while not requests[requestId] do
-            Wait(250)
-            if GetGameTimer() >= timer then
-                return { success = false, error = "Waiting for base64 conversion timed out." }
-            end
-        end
-        return { success = true, base64 = requests[requestId] }
-    else
-        return headshot
-    end
-end
-
-RegisterNUICallback("base64", function(data, cb)
-    if data.handle then
-        UnregisterPedheadshot(data.handle)
-    end
-    if data.id then
-        requests[data.id] = data.base64
-        Wait(1500)
-        requests[data.id] = nil
-    end
-
-    cb({ ok = true })
-end)
-
---[[MUG-SHOT]]
-
 
 --[[ooc]]
 
-RegisterNUICallback("ooc", function (data)
-    TriggerServerEvent('SY_Pausemenu:ooc',data.oocText)
+RegisterNUICallback("ooc", function(data)
+    TriggerServerEvent('SY_Pausemenu:ooc', data.oocText)
 end)
 
 RegisterNetEvent('SY_Pausemenu:SendOoc')
