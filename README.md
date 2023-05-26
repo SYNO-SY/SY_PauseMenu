@@ -19,5 +19,5 @@ Check the config.lua for options you might want to change.
 - Add Bot Tocken and webhook for Discord Image and report system.
 - Do not change the resource Name it will broke the resource from being started.
 
-For Support Pop-up into the Discord server 
+# For Support Pop-up into the Discord server 
 - https://discord.gg/wDqBYaN54n
