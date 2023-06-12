@@ -515,7 +515,10 @@
                   <span class="my-2">Keybinds</span>
                 </div>
               </div>
-              <div class="op-btn" id="exit">
+              <div type="button"
+                class="btn op-btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#Modal" >
                 <div class="d-flex flex-column text-center">
                   <img class="mx-3" src="./imgs/exit.svg" />
                   <span class="my-2">Exit</span>
@@ -532,6 +535,55 @@
     <!--End of Footer-->
 
     <!--End of mainBar-->
+        <!-- exit model -->
+    <div
+      class="modal fade"
+      id="Modal"
+      tabindex="-1"
+      aria-labelledby="ModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div
+          class="modal-content"
+          style="background-color: var(--model-bg); backdrop-filter: blur(8px)">
+          <div class="modal-header">
+            <h1
+              class="modal-title fs-5"
+              id="ModalLabel">
+              Quit
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="background-color: white"></button>
+          </div>
+          <div
+            class="modal-body"
+            style="color: white">
+            Do you Really want to quit
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="no"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">
+              NO
+            </button>
+            <button
+              type="button"
+              id="exit"
+              class="btn btn-primary">
+              YES
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of exit model-->
+    
     <script src="nui://game/ui/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="./bootstrap/bootstrap.min.js"></script>
